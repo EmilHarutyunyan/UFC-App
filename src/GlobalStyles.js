@@ -14,7 +14,7 @@ Fonts
 Variables
 ===============
 */
-::root {
+:root {
   --clr-primary-1:#ECECEC;
   --clr-primary-2:#D20A0A;
   --clr-primary-3:#fff; 
@@ -24,7 +24,6 @@ Variables
   --clr-white: #fff;
   --clr-black: #000;
   --transition: all 0.3s linear;
-  --spacing: 0.1rem;
 }
 /*
 =============== 
@@ -41,10 +40,10 @@ Global Styles
 }
 body {
   font-family: 'Source Sans Pro', sans-serif;
-  background: var(--cl-primary-1);
-  color: var(--cl-primary-6);
-  line-height: 1.5;
-  font-size: 0.875rem;
+  background: var(--clr-primary-1);
+  color: var(--clr-primary-6);
+  line-height: 25px;
+  font-size: 16px;
 }
 ul {
   list-style-type: none;
@@ -52,16 +51,18 @@ ul {
 a {
   text-decoration: none;
 }
+button {
+  border: none;
+  background-color: none;
+  cursor: pointer;
+}
 h1,
 h2,
 h3,
 h4 {
-  letter-spacing: var(--spacing);
   text-transform: capitalize;
-  line-height: 1.25;
-  margin-bottom: 0.75rem;
 }
-h1 {
+/*h1 {
   font-size: 3rem;
 }
 h2 {
@@ -100,10 +101,21 @@ p {
     line-height: 1;
   }
 }
+*/
 /*
 =============== 
 Reviews
 ===============
 */
-
+.main-container {
+  max-width: 1750px;
+  padding: 0px 20px;
+  margin:0 auto;
+}
+main {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+}
 `;
