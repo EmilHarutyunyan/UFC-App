@@ -1,5 +1,4 @@
 import React from 'react'
-import SearchBar from '../../components/SearchBar'
 // import SvgLogo from '../../components/SvgLogo'
 // import U from "../../assets/img/u.png"
 // import Fup from "../../assets/img/f-up.png"
@@ -14,12 +13,11 @@ import UfcLong from "../../assets/img/ufc-long.png"
 function Home() {
   return (
     <>
-    <SearchBar/>
-
+    {/* <SearchBar/> */}
     <Wrapper>
       <Content>
         <Article>
-        <SvgLogo/>
+          <SvgLogo/>
         </Article>
         <Article>
           <ImgWrapper>
