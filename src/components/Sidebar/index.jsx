@@ -1,5 +1,5 @@
-import React, { useState,useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 // Icons
 import { IoCloseOutline } from 'react-icons/io5';
 // Img
@@ -16,46 +16,31 @@ import {
   SidebarNav,
   SidebarFooter,
 } from './Sidebar.styles';
+import SidebarChild from '../SidebarChild';
 
 function Sidebar({ isSidebarOpen, handlerSidebar }) {
-  const [linkChild, setLinkChild] = useState([{ subTitle: '', children: [] }]);
-  const childRef =  useRef(null)
-  const childrenBuild = (childrens) => {
-    const build = childrens[0].children.map((item, index) => {
-      const { text, url, children } = item;
-      return (
-        <li key={index}>
-          <Link to={url}>{text}</Link>
-          {children && childrenBuild(children)}
-        </li>
-      );
-    });
-    return (
-      <ul>
-        {childrens.subTitle && <p>{childrens.subTitle }</p>}
-        {build}
-      </ul>
-    );
-  };
+  const [linkChild, setLinkChild] = useState({ subTitle: '', children: [] });
+  const childRef = useRef(null);
+
   const handlerChild = (subTitle, children) => {
-    if (linkChild && subTitle === linkChild[0].subTitle) {
+    if (linkChild && subTitle === linkChild.subTitle) {
       setTimeout(() => {
-        // childRef.current.style = "transform: translateX(-120%);"
-      }, 300);
-      setLinkChild([{ subTitle: '', children: [] }]);
+        childRef.current.style = 'transform: translateX(-120%);';
+      }, 10);
+      setLinkChild({ subTitle: '', children: [] });
       return;
     }
-    
-    setLinkChild([{subTitle, children}]);
-    console.log(childRef.current);
-    childRef.current.style = "transform: translateX(100%);"
-    
+
+    setLinkChild({ subTitle, children });
+
+    childRef.current.style = 'transform: translateX(100%);';
   };
+
   console.log(isSidebarOpen);
   return (
     <>
       <Wrapper>
-        <ContentParent className={isSidebarOpen ? 'parent-menu active' : ''}>
+        <ContentParent className={isSidebarOpen ? 'active' : ''}>
           <Content>
             <SidebarHeader>
               <button
@@ -65,27 +50,30 @@ function Sidebar({ isSidebarOpen, handlerSidebar }) {
               >
                 <IoCloseOutline />
               </button>
-              <img src={Logo} alt='log' />
+              <div>
+                <img src={Logo} alt='log' />
+              </div>
             </SidebarHeader>
             <SidebarNav>
               <ul>
                 {links.map((item, index) => {
                   const { text, url, children, subTitle } = item;
-                  if (children && subTitle) {
+                  if (children || subTitle) {
                     return (
                       <li
                         key={index}
                         onClick={() => handlerChild(subTitle, children)}
                       >
-                        <Link
+                        <NavLink
                           to={url}
+                          className={({ isActive }) => (isActive ? 'active' : 'inactive')}
                           onClick={(e) => {
                             e.preventDefault();
                             handlerChild(subTitle, children);
                           }}
                         >
                           {text}
-                        </Link>
+                        </NavLink>
 
                         {/* {children &&  <ContentChild className="sub-menu"><Content><ChildrenBuild childrens={children} /></Content></ContentChild>} */}
                       </li>
@@ -93,7 +81,15 @@ function Sidebar({ isSidebarOpen, handlerSidebar }) {
                   }
                   return (
                     <li key={index}>
-                      <Link to={url}>{text}</Link>
+                      <NavLink
+                        to={url}
+                        className={({ isActive }) => (isActive ? 'active' : 'inactive')}
+                        onClick={(e) => {
+                          e.preventDefault();
+                        }}
+                      >
+                        {text}
+                      </NavLink>
                     </li>
                   );
                 })}
@@ -105,11 +101,11 @@ function Sidebar({ isSidebarOpen, handlerSidebar }) {
             </SidebarFooter>
           </Content>
         </ContentParent>
-        {linkChild[0].children.length > 0 ? (
-          <ContentChild ref={childRef} className='active'>
-            <Content>{childrenBuild(linkChild)}</Content>
-          </ContentChild>
-        ):null}
+        <ContentChild ref={childRef} className='active'>
+          {linkChild.children.length > 0 ? (
+            <SidebarChild childrens={linkChild} />
+          ) : null}
+        </ContentChild>
       </Wrapper>
     </>
   );

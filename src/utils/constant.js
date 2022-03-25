@@ -2,11 +2,20 @@ export const links = [
   {
     text: 'schedule',
     url: '/schedule',
+    // subTitle: '4564',
     children:[
-      // {
-      //   text: 'schedule',
-      //   url: '/schedule',
-      // }
+      {
+        text: 'schedule-1',
+        url: '/schedule',
+      },
+      {
+        text: 'schedule-2',
+        url: '/schedule',
+      },
+      {
+        text: 'schedule-3',
+        url: '/schedule',
+      },
     ],
   },
   {
@@ -21,13 +30,6 @@ export const links = [
       {
         text: 'flyweight',
         url: '/fighters/flyweight',
-        subTitle: 'weight classe',
-        // children:[
-        //   {
-        //     text: '123',
-        //     url: '/3543',
-        //   }
-        // ]
       },
       {
         text: 'bantamweight',

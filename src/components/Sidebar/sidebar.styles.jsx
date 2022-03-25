@@ -26,7 +26,7 @@ export const ContentParent = styled.div`
   left: 0;
   z-index:3;
   /* overflow: auto; */
-  box-shadow: 12px 0px 20px 0px #999999;
+  box-shadow: 0px 1px 44px #00000078;
   transform: translateX(-120%);
   transition:var(--transition);
   &.active {
@@ -36,7 +36,7 @@ export const ContentParent = styled.div`
 `;
 export const ContentChild = styled.div`
   background-color:var(--clr-primary-7);
-  opacity: 0.8;
+  opacity: 0.96;
   width: 450px;
   height: 100%;
   position: fixed;
@@ -44,10 +44,10 @@ export const ContentChild = styled.div`
   left: 0;
   z-index:1;
   overflow: auto;
-  /* box-shadow: 12px 0px 20px 0px #999999; */
   transform: translateX(-120%);
   transition:var(--transition);
   /* animation: identifier 0.3s ease-in forwards;
+
   &.active {
     transform: translateX(100%);
     transition:var(--transition);
